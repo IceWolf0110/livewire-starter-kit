@@ -18,12 +18,11 @@ RUN pacman -S --noconfirm \
     php-apache \
     php-curl \
     php-zip \
-    php-xdebug \
     composer \
     git \
     unzip \
     base-devel \
-    mariadb-clients
+    mariadb
 
 # Enable useful PHP extensions
 RUN sed -i 's/;extension=curl/extension=curl/' /etc/php/php.ini && \

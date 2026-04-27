@@ -10,7 +10,6 @@
     "vscode": {
       "extensions": [
         "bmewburn.vscode-intelephense-client",
-        "xdebug.php-debug",
         "ms-azuretools.vscode-docker"
       ]
     }
