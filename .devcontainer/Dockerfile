@@ -2,9 +2,11 @@ FROM archlinux:latest
 
 ENV TERM=xterm
 
+# Init + update
 RUN pacman -Sy --noconfirm archlinux-keyring && \
     pacman -Syu --noconfirm
 
+# Install PHP + tools (NO XDEBUG)
 RUN pacman -S --noconfirm \
     php \
     php-fpm \
@@ -27,6 +29,7 @@ RUN sed -i 's/;extension=curl/extension=curl/' /etc/php/php.ini && \
     sed -i 's/;extension=mysqli/extension=mysqli/' /etc/php/php.ini && \
     sed -i 's/;extension=pdo_mysql/extension=pdo_mysql/' /etc/php/php.ini
 
-WORKDIR /workspace
+# IMPORTANT for Codespaces
+WORKDIR /workspaces
 
 CMD ["bash"]
