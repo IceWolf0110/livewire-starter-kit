@@ -1,31 +1,26 @@
 version: "3.9"
+
 services:
-  cli:
-    build: cli
-    volumes:
-      - ..:/workspaces/laravel
-
-  fpm:
-    build: fpm
-    volumes:
-      - ..:/workspaces/laravel
-    user: 1000:1000
-
-  nginx:
-    build: nginx
-    volumes:
-      - ..:/workspaces/laravel
-    ports:
-      - 80:80
+  app:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile   # 👈 critical
+    command: sleep infinity
     depends_on:
-      - fpm
+      - db
 
-  postgres:
-    image: postgres:16.3-alpine
+  db:
+    image: mariadb:latest
+    restart: unless-stopped
     environment:
-      POSTGRES_DB: laravel
-      POSTGRES_USER: root
-      POSTGRES_HOST_AUTH_METHOD: trust
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: app
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb-data:/var/lib/mysql
 
-  redis:
-    image: redis:7.2-alpine
+volumes:
+  mariadb-data:
