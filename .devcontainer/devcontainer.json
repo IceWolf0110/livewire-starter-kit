@@ -1,21 +1,18 @@
 {
-  "name": "Arch PHP + MariaDB",
-  "dockerComposeFile": "docker-compose.yml",
-  "service": "app",
-  "workspaceFolder": "/workspace",
+    "name": "Arch PHP + MariaDB",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "app",
 
-  "features": {},
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "bmewburn.vscode-intelephense-client",
-        "ms-azuretools.vscode-docker"
-      ]
-    }
-  },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "bmewburn.vscode-intelephense-client",
+                "ms-azuretools.vscode-docker"
+            ]
+        }
+    },
 
-  "forwardPorts": [8000, 3306],
-
-  "postCreateCommand": "composer install || true"
+    "forwardPorts": [8000, 3306]
 }

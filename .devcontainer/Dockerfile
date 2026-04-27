@@ -1,13 +1,10 @@
 FROM archlinux:latest
 
-# Avoid interactive pacman
 ENV TERM=xterm
 
-# Initialize keyring and update system
 RUN pacman -Sy --noconfirm archlinux-keyring && \
     pacman -Syu --noconfirm
 
-# Install PHP (latest in Arch repo) + tools
 RUN pacman -S --noconfirm \
     php \
     php-fpm \
@@ -22,9 +19,9 @@ RUN pacman -S --noconfirm \
     git \
     unzip \
     base-devel \
-    mariadb
+    mariadb-clients
 
-# Enable useful PHP extensions
+# Enable extensions
 RUN sed -i 's/;extension=curl/extension=curl/' /etc/php/php.ini && \
     sed -i 's/;extension=gd/extension=gd/' /etc/php/php.ini && \
     sed -i 's/;extension=mysqli/extension=mysqli/' /etc/php/php.ini && \
@@ -32,5 +29,4 @@ RUN sed -i 's/;extension=curl/extension=curl/' /etc/php/php.ini && \
 
 WORKDIR /workspace
 
-# Default command
 CMD ["bash"]
